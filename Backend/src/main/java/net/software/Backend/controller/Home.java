@@ -2,10 +2,7 @@ package net.software.Backend.controller;
 
 import net.software.Backend.model.User;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class Home {
@@ -21,6 +18,16 @@ public class Home {
         user.setId("3100");
         user.setName("software");
         user.setEmail("info@software.net");
+        return user;
+    }
+
+    //面试题pass variable操作
+    @GetMapping("/user/{id}/{username}")
+    public User userByPathVariable(@PathVariable String id, @PathVariable("username") String name){
+        User user = new User();
+        user.setId(id);
+        user.setName(name);
+        user.setEmail("info@sofware.net");
         return user;
     }
 }
