@@ -1,5 +1,6 @@
 package net.software.Backend.service;
 
+import net.software.Backend.error.ProductNotFoundException;
 import net.software.Backend.model.Product;
 import org.springframework.stereotype.Service;
 
@@ -17,5 +18,25 @@ public class ProductServiceImpl implements ProductService {
         }
         productList.add(product);
         return product;
+    }
+
+    @Override
+    public List<Product> getAll() {
+        return productList;
+    }
+
+    @Override
+    public Product getById(String id) {
+        return productList.stream().filter(product -> product.getProductId().equals(id))
+                .findFirst()
+                //.orElseThrow(() -> new RuntimeException("Product not found with id: " + id));
+                .orElseThrow(() -> new ProductNotFoundException("Product not found with id: " + id));
+    }
+
+    @Override
+    public String deleteById(String id) {
+        Product product = productList.stream().filter(e -> e.getProductId().equals(id)).findFirst().get();
+        productList.remove(product);
+        return "Delete product with id : " + id;
     }
 }
