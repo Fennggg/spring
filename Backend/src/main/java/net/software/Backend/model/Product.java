@@ -1,6 +1,12 @@
 package net.software.Backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties({"title", "description"})
 public class Product {
+
+    @JsonIgnore
     private String productId;
     private String title;
     private String description;
