@@ -4,6 +4,8 @@ import net.software.Backend.model.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.module.ModuleDescriptor;
+
 @RestController
 public class Home {
     @RequestMapping("/")
@@ -28,6 +30,17 @@ public class Home {
         user.setId(id);
         user.setName(name);
         user.setEmail("info@sofware.net");
+        return user;
+    }
+
+    @GetMapping("/userparams")
+    public  User userByRequestParams(@RequestParam String id,
+                                     @RequestParam("username") String name,
+                                     @RequestParam(required = false, defaultValue = "info@software.net") String email) {
+        User user = new User();
+        user.setId(id);
+        user.setName(name);
+        user.setEmail(email);
         return user;
     }
 }
