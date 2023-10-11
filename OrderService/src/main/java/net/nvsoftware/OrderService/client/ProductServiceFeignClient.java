@@ -17,3 +17,5 @@ public interface ProductServiceFeignClient {
         throw new RuntimeException("PRODUCT-SERVICE is down");
     }
 }
+
+
